@@ -21,9 +21,12 @@
     <ItemGroup>
         <CSFile Include = "*.cs"/>
     </ItemGroup>
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+      <Exec Command="call prebuild.bat" />
+    </Target>
     <ItemDefinitionGroup>
       <PreBuildEvent>
-        <Command>call prebuild.bat</Command>
+        <Command></Command>
         <Message>Bruh</Message>
       </PreBuildEvent>
     </ItemDefinitionGroup>
