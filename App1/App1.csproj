@@ -24,12 +24,6 @@
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
       <Exec Command="call prebuild.bat" />
     </Target>
-    <!-- <ItemDefinitionGroup>
-      <PreBuildEvent>
-        <Command></Command>
-        <Message>Bruh</Message>
-      </PreBuildEvent>
-    </ItemDefinitionGroup> -->
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
