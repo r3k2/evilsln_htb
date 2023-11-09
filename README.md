@@ -1,3 +1,6 @@
+# Modified by ReK2 for HTB CTF box
+
+
 # EvilSln: Don't open .sln files
 
 A New Exploitation Technique for Visual Studio Projects
